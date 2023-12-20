@@ -1,0 +1,36 @@
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+zip-safe = false
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false
+
+[project]
+
+name = "stellar_dataset"
+
+authors = []
+
+dynamic = ["version"]
+keywords = []
+description = "STELLAR Dataset"
+requires-python = ">=3.8"
+readme = "README.md"
+dependencies = [
+    "rembg[gpu]", # for removing background
+    "Pillow",
+]
+license = { text = "proprietary" }
+
+[project.optional-dependencies]
+dev = ["mypy", "flake8", "pytest", "black", "pylint", "imgcat"]
+[project.urls]
+homepage = "https://github.com/stellar-gen-ai/stellar-dataset"
+
+[tool.setuptools.dynamic]
+version = { attr = "stellar_dataset.__version__" }
