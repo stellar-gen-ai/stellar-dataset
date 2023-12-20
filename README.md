@@ -12,6 +12,10 @@ This folder containts information on how to download and setup the STELLAR datas
 The codebase is maintained by [Alexandros Benetatos](). For any questions please reach out.
 
 
+## License
+
+Before downloading or using any part of the code in this repository, please review and acknowledge the terms and conditions set forth in both the ["License Terms"](./LICENSE) and ["Third Party License Terms"](./THIRD-PARTIES-LICENSE) included in this repository. Continuing to download and use any part of the code in this repository confirms you agree with these terms and conditions.
+
 ## Usage
 
 Summary:
@@ -110,6 +114,3 @@ Where `dataset_dir` is the directory of `STELLAR` dataset from **Download Instru
 | Tokens/Prompt      | 7.1     | 16      | 2       |
 | Detectables/Prompt | 1.5     | 3       | 0       |
 
-## License
-
-Before downloading or using any part or the code in this repository the propsective user acknowledges that they have read and agreed with the terms described in the license shown in [LICENSE](./LICENSE) and the Third Party License Terms shown in [THIRD-PARTIES](./THIRD-PARTIES-LICENSE).
