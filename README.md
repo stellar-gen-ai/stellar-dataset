@@ -9,7 +9,7 @@ Authors:
 
 This folder containts information on how to download and setup the STELLAR dataset.
 
-The codebase is maintained by [Alexandros Benetatos](). For any questions please reach out.
+The codebase is maintained by [Alexandros Benetatos](https://www.linkedin.com/in/alexandros-benetatos/). For any questions please reach out.
 
 
 ## License
