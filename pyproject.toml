@@ -18,12 +18,18 @@ authors = []
 
 dynamic = ["version"]
 keywords = []
-description = "STELLAR Dataset"
+description = "Stellar Dataset"
 requires-python = ">=3.8"
 readme = "README.md"
 dependencies = [
     "rembg[gpu]", # for removing background
     "Pillow",
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "seaborn",
+    "tqdm",
+    "flair",
 ]
 license = { text = "proprietary" }
 
