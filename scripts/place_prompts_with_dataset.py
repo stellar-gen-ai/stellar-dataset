@@ -19,14 +19,31 @@ def process(dataset_dir):
         pjoin(
             os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
             "prompts",
-            "prompts.json",
+            "stellar_h.json",
         )
     ) as fp:
-        prompts = json.load(fp)
+        prompts_h = json.load(fp)
+    with open(
+        pjoin(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            "prompts",
+            "stellar_t.json",
+        )
+    ) as fp:
+        prompts_t = json.load(fp)
 
-    for subject_folder in filter(lambda nm: nm.isnumeric(), os.listdir(dataset_dir)):
-        with open(pjoin(dataset_dir, subject_folder, "prompt.json"), "w") as fp:
-            json.dump(prompts[subject_folder], fp, indent=4)
+    for subject_folder in filter(
+        lambda nm: nm.isnumeric(), os.listdir(dataset_dir)
+    ):
+        with open(
+            pjoin(dataset_dir, subject_folder, "prompts_t.json"), "w"
+        ) as fp:
+            json.dump(prompts_t[subject_folder], fp, indent=4)
+        if int(subject_folder) < 200:
+            with open(
+                pjoin(dataset_dir, subject_folder, "prompts_h.json"), "w"
+            ) as fp:
+                json.dump(prompts_h[subject_folder], fp, indent=4)
 
     shutil.copyfile(
         pjoin(

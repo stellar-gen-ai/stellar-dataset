@@ -21,7 +21,9 @@ def parse_dataset(dataset_dir):
         for zip_filepath, unzip_dir in zip(
             [
                 pjoin(dataset_dir, "image.zip"),
-                pjoin(dataset_dir, "mask", "CelebAMask-HQ-mask-color-palette.zip"),
+                pjoin(
+                    dataset_dir, "mask", "CelebAMask-HQ-mask-color-palette.zip"
+                ),
             ],
             [
                 pjoin(dataset_dir, "images_r"),
@@ -94,8 +96,17 @@ def parse_dataset(dataset_dir):
         "r",
     ) as fp:
         stellar_celebahq_idxs = list(
-            map(lambda fl: int(fl[:-4]), fp.read().strip("\n").split("\n")[1:])
+            map(
+                lambda ln: [
+                    int(ln.split(",")[0].split(".")[0]),
+                    ln.split(",")[1],
+                ],
+                fp.read().strip("\n").split("\n")[1:],
+            )
         )
+    stellar_celebahq_idxs = {
+        itm[0]: itm[1] for itm in stellar_celebahq_idxs
+    }  # {0: 'val', 1: 'test', ...}
 
     if not pexists(pjoin(dataset_dir, "annotations")):
         exit()
@@ -103,12 +114,12 @@ def parse_dataset(dataset_dir):
     # Load attributes and keep only those in STELLAR
     with open(pjoin(dataset_dir, "annotations", "attributes.txt"), "r") as fp:
         attributes = fp.read().strip("\n").split("\n")[1:]
-    attributes = list(map(lambda l: l.strip().split(), attributes))
+    attributes = list(map(lambda ll: ll.strip().split(), attributes))
     attributes_labels = attributes[0]
     attributes = {
         int(itm[0][:-4]): itm[1:]
         for itm in attributes[1:]
-        if int(itm[0][:-4]) in stellar_celebahq_idxs
+        if int(itm[0][:-4]) in stellar_celebahq_idxs.keys()
     }
 
     # Load finegrained attributes and keep only those in STELLAR
@@ -117,25 +128,25 @@ def parse_dataset(dataset_dir):
     ) as fp:
         finegrained_attributes = fp.read().strip("\n").split("\n")
     finegrained_attributes = list(
-        map(lambda l: l.strip("\t").split("\t"), finegrained_attributes)
+        map(lambda ll: ll.strip("\t").split("\t"), finegrained_attributes)
     )
     finegrained_attributes_labels = finegrained_attributes[0][1:]
     # image 5380 does not have a finegrained annotation
     finegrained_attributes = {
         int(fa[0][:-4]): fa[1:]
         for fa in finegrained_attributes[1:]
-        if int(fa[0][:-4]) in stellar_celebahq_idxs
+        if int(fa[0][:-4]) in stellar_celebahq_idxs.keys()
     }
 
     # Load identities and keep only those in STELLAR
     with open(pjoin(dataset_dir, "annotations", "identity.txt"), "r") as fp:
         identities = fp.read().strip("\n").split("\n")
-    identities = list(map(lambda l: l.strip().split(), identities))
-    # identities = list(map(identities.__getitem__, stellar_celebahq_idxs))
+    identities = list(map(lambda ll: ll.strip().split(), identities))
+
     identities = {
         int(fa[0][:-4]): int(fa[1])
         for fa in identities
-        if int(fa[0][:-4]) in stellar_celebahq_idxs
+        if int(fa[0][:-4]) in stellar_celebahq_idxs.keys()
     }
 
     # Invert identities
@@ -143,9 +154,20 @@ def parse_dataset(dataset_dir):
     for k, v in identities.items():
         identities_inv[v].append(k)
 
+    identities_inv = {
+        idd: [
+            celeba_filenames,
+            stellar_celebahq_idxs[celeba_filenames[0]],
+        ]
+        for idd, celeba_filenames in identities_inv.items()
+    }
+    identities_inv = dict(
+        sorted(identities_inv.items(), key=lambda x: (x[1][1], x[0]))
+    )
+
     # Save STELLAR
-    for new_id, (old_id, celebahq_filenames) in enumerate(
-        sorted(identities_inv.items())
+    for new_id, (old_id, (celebahq_filenames, split)) in enumerate(
+        identities_inv.items()
     ):
         save_dir = pjoin(dataset_dir, f"{new_id:03d}")
         try:
@@ -180,6 +202,7 @@ def parse_dataset(dataset_dir):
                 },
                 "identity": old_id,
                 "original_filename": f"{filename}.jpg",
+                # "split": split,
             }
         for idx, celeba_annos in sample_annos.items():
             with open(pjoin(save_dir, f"{idx}_attributes.json"), "w") as fp:
@@ -208,4 +231,5 @@ if __name__ == "__main__":
         help="Directory where the dataset will be saved",
     )
     dataset_dir = parser.parse_args().dataset_dir
+    parse_dataset(dataset_dir)
     parse_dataset(dataset_dir)
