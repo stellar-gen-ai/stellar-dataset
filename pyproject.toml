@@ -14,7 +14,15 @@ namespaces = false
 
 name = "stellar_dataset"
 
-authors = []
+authors = [
+  {name = "Panos Achlioptas"},
+  {name = "Alexandros Benetatos"},
+  {name = "Iordanis Fostiropoulos"},
+  {name = "Dimitris Skourtis"},
+]
+maintainers = [
+  {name = "Alexandros Benetatos"}
+]
 
 dynamic = ["version"]
 keywords = []
@@ -31,7 +39,7 @@ dependencies = [
     "tqdm",
     "flair",
 ]
-license = { text = "proprietary" }
+license = {file = "LICENSE"}
 
 [project.optional-dependencies]
 dev = ["mypy", "flake8", "pytest", "black", "pylint", "imgcat"]
