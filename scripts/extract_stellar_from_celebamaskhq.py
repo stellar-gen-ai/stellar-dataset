@@ -91,7 +91,7 @@ def parse_dataset(dataset_dir):
         pjoin(
             os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
             "images",
-            "celebahq_images.txt",
+            "celebahq_ids.txt",
         ),
         "r",
     ) as fp:
