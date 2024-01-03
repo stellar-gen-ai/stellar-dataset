@@ -58,7 +58,9 @@ gdown --folder CELEBA_DIALOG_LINK -O output_dir/STELLAR
 
 ### 2. Process CelebAMask-HQ
 
-Assuming you have access to [CelebAMask-HQ](https://mmlab.ie.cuhk.edu.hk/projects/CelebA/CelebAMask_HQ.html) following the instruction above, you can extract the images we use for our experiments with Stellar, by running the following command:
+To download the ids for the subset of [CelebAMask-HQ](https://mmlab.ie.cuhk.edu.hk/projects/CelebA/CelebAMask_HQ.html) dataset we use, you need to first accept the terms of use for Stellar Prompts Dataset [here](https://forms.gle/efUfbSqbn9rH77mo8). You will then be provided with a download URL. After downloading, place `celebahq_ids.txt` in the `./images/` directory.
+
+Assuming you have access to [CelebAMask-HQ](https://mmlab.ie.cuhk.edu.hk/projects/CelebA/CelebAMask_HQ.html) following the instruction on step *1*, you can extract the images we use for our experiments with Stellar, by running the following command:
 
 ```bash
 python scripts/extract_stellar_from_celebamaskhq.py --dataset-dir output_dir/STELLAR/
