@@ -23,18 +23,6 @@ Each of the *10.4k* Stellar-T prompts is annotated with the corresponding `detec
 There are two types of prompt categories. The ones related to the objects referenced in the prompt (e.g. `city`, `vehicle`, etc.) and the ones related to the main activity/action happening in the prompt (e.g. `leisure`, `culinary`, `sports`, `arts`, etc). The prompt categories are not mutually exclusive or exhaustive. For example, a prompt can be both `culinary` and `leisure` at the same time but any of the two might not be annotated. Additionally, the action category refers to the main action and not the context, e.g. `driving a car in space` would be annotated as `everyday` because `driving a car` is an `everyday` action, despite the context of being in space.
 
 
-### Main Statistics Summary
-
-| Annotation | Unique |
-|-----------------|--------|
-| Prompt         | 20400  |
-| Detectables     | 350    |
-
-| Statistics         | Average | Maximum | Minimum |
-|--------------------|---------|---------|---------|
-| Tokens/Prompt      | 7.1     | 16      | 2       |
-| Detectables/Prompt | 1.5     | 3       | 0       |
-
 ## License
 
 Before downloading or using any part of the code in this repository, please review and acknowledge the terms and conditions set forth in both the ["License Terms"](./LICENSE) and ["Third Party License Terms"](./THIRD-PARTIES-LICENSE) included in this repository. Continuing to download and use any part of the code in this repository confirms you agree with these terms and conditions.
