@@ -37,7 +37,7 @@ dependencies = [
     "matplotlib",
     "seaborn",
     "tqdm",
-    "flair",
+    "nltk",
 ]
 license = {file = "LICENSE"}
 
