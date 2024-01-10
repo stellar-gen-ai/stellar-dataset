@@ -27,7 +27,7 @@ maintainers = [
 dynamic = ["version"]
 keywords = []
 description = "Stellar Dataset"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 readme = "README.md"
 dependencies = [
     "rembg[gpu]", # for removing background
@@ -38,6 +38,7 @@ dependencies = [
     "seaborn",
     "tqdm",
     "nltk",
+    "torch",
 ]
 license = {file = "LICENSE"}
 
